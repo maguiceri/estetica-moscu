@@ -289,7 +289,8 @@
 
   /* ---------- responsive ---------- */
   @media(max-width:880px){
-    .swipe .doc-photo{transition:clip-path .9s cubic-bezier(.6,0,.16,1)}
+    /* en mobile la card siempre visible (sin barrido, para que nunca quede oculta) */
+    .swipe .doc-photo{clip-path:none!important;transition:none}
     .menu{position:fixed;top:86px;left:16px;right:16px;background:rgba(16,10,14,.97);
       backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-direction:column;
       align-items:stretch;gap:0;padding:8px 22px 20px;border:1px solid var(--line);border-radius:22px;
