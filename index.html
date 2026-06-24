@@ -120,7 +120,7 @@
   .nav-toggle span{display:block;width:24px;height:2px;background:var(--pink);margin:5px 0;transition:.3s}
 
   /* ---------- hero ---------- */
-  .hero{position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+  .hero{position:relative;overflow:hidden;min-height:100vh;min-height:100dvh;display:flex;align-items:center}
   .hero .wrap{padding:140px 30px 90px;width:100%;
     display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
   .hero-inner{min-width:0}
@@ -160,6 +160,9 @@
 
   /* ---------- secciones ---------- */
   section{padding:118px 0;position:relative}
+  /* cada sección ocupa una pantalla completa y centra su contenido (se adapta a cualquier alto) */
+  #doctor,#turnos,#contacto{min-height:100vh;min-height:100dvh;
+    display:flex;flex-direction:column;justify-content:center}
   .head{max-width:48em;margin-bottom:60px}
   .head h2{font-size:clamp(2.3rem,4.4vw,3.6rem);margin:16px 0 16px}
   .head p{color:var(--ink-dim);font-size:1.06rem;max-width:40em}
