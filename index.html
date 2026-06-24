@@ -281,13 +281,14 @@
   .doc .reveal.in .creds li:nth-child(3){transition-delay:.32s}
   .doc .reveal.in .creds li:nth-child(4){transition-delay:.42s}
 
-  /* foto del doctor: se revela deslizándose desde la izquierda */
-  .swipe-in{clip-path:inset(0 100% 0 0);transition:clip-path 1.15s cubic-bezier(.6,0,.16,1)}
-  .swipe-in.in{clip-path:inset(0 0 0 0)}
+  /* foto del doctor: entra deslizándose desde la izquierda con el scroll */
+  .slide-in{opacity:0;transform:translateX(-56px);
+    transition:opacity .9s ease,transform 1.05s cubic-bezier(.6,0,.16,1)}
+  .slide-in.in{opacity:1;transform:none}
 
   /* ---------- responsive ---------- */
   @media(max-width:880px){
-    .swipe-in{transition:clip-path .9s cubic-bezier(.6,0,.16,1)}
+    .slide-in{transform:translateX(-32px);transition:opacity .7s ease,transform .85s cubic-bezier(.6,0,.16,1)}
     .menu{position:fixed;top:86px;left:16px;right:16px;background:rgba(16,10,14,.97);
       backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-direction:column;
       align-items:stretch;gap:0;padding:8px 22px 20px;border:1px solid var(--line);border-radius:22px;
@@ -343,7 +344,7 @@
     .btn:hover,.info:hover{transform:none}
     .hero-inner>*,.hero-logo{animation:none!important;opacity:1}
     .trust-track{animation:none}
-    .swipe-in{clip-path:none;transition:none}
+    .slide-in{transform:none;opacity:1;transition:none}
   }
 </style>
 </head>
@@ -546,7 +547,7 @@
   <!-- DOCTOR -->
   <section id="doctor">
     <div class="wrap doc">
-      <div class="doc-photo reveal">
+      <div class="doc-photo slide-in">
         <div class="doc-ph"><span class="ph-m">AS</span><span class="ph-name">Dr. Agustín Sola</span></div>
         <img src="doctor.jpg" alt="Dr. Agustín Sola" onerror="this.style.display='none'" />
       </div>
@@ -767,7 +768,7 @@
   const io=new IntersectionObserver((entries)=>{
     entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
   },{threshold:.16});
-  document.querySelectorAll('.reveal,.swipe-in').forEach(el=>io.observe(el));
+  document.querySelectorAll('.reveal,.slide-in').forEach(el=>io.observe(el));
 
   // ====== tratamientos: secuencia de videos guiada por scroll ======
   (function(){
