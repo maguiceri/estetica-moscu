@@ -815,8 +815,9 @@
       const g=cl(-rect.top/span);
       panels.forEach((p,i)=>{
         const phi=g*(N-1)-i;
-        const enter=sm(cl((phi+0.7)/0.7));
-        const exit =sm(cl((phi-0.30)/0.7));
+        // sin zona muerta: apenas te corrés del centro, el actual sale y el siguiente entra
+        const enter=sm(cl(phi+1));
+        const exit =sm(cl(phi));
         const op=enter*(1-exit);
         p.style.opacity=op.toFixed(3);
         p.style.transform='translateX('+((1-enter)*42+exit*-10).toFixed(2)+'%) scale('+(1-exit*0.18).toFixed(3)+')';
