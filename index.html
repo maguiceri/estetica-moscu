@@ -695,6 +695,7 @@
       if(finished) return; finished=true;
       if(ctxH) drawWoman(ctxH,1+EDGE);          // el hero queda con la chica dibujada
       if(tMH) tMH.style.opacity=1; if(tEH) tEH.style.opacity=1;
+      window.scrollTo(0,0);                       // al habilitar el scroll, arrancar desde arriba
       document.body.classList.remove('intro-open');
       document.body.classList.add('entered');
       intro.classList.add('leaving');           // el logo del centro se achica y se va al costado
@@ -746,10 +747,17 @@
     }
   })();
 
-  // ====== arrancar siempre desde el inicio al recargar ======
+  // ====== arrancar SIEMPRE desde el principio en cada carga/recarga ======
   if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
-  window.addEventListener('beforeunload',()=>window.scrollTo(0,0));
-  window.addEventListener('pageshow',()=>window.scrollTo(0,0));
+  // si quedó un #ancla en la URL (por ej. tras tocar "Tratamientos"), lo quitamos
+  // para que al recargar no salte a esa sección
+  if(location.hash){ try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} }
+  function toTop(){ window.scrollTo(0,0); }
+  toTop();
+  window.addEventListener('DOMContentLoaded',toTop);
+  window.addEventListener('load',()=>{ toTop(); requestAnimationFrame(toTop); });
+  window.addEventListener('pageshow',toTop);
+  window.addEventListener('beforeunload',toTop);
 
   // ====== menú móvil ======
   const toggle=document.querySelector('.nav-toggle');
