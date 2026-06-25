@@ -771,6 +771,21 @@
   });
   menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
 
+  // ====== navegación interna: salto directo (no "girar" por el carrusel) ======
+  // con scroll-behavior:smooth, ir a una sección de abajo scrollea a través de los
+  // tratamientos y se ve pasar todos los videos. Forzamos un salto instantáneo.
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const href=a.getAttribute('href');
+      if(!href || href.length<2) return;
+      const el=document.getElementById(href.slice(1));
+      if(!el) return;
+      e.preventDefault();
+      const y=Math.max(0, el.getBoundingClientRect().top+window.scrollY-92);
+      window.scrollTo({top:y,behavior:'instant'});
+    });
+  });
+
   // ====== form demo ======
   const form=document.getElementById('turnoForm');
   form.addEventListener('submit',e=>{
