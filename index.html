@@ -159,10 +159,9 @@
   @keyframes trustMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* ---------- secciones ---------- */
-  section{padding:118px 0;position:relative}
-  /* cada sección ocupa una pantalla completa y centra su contenido (se adapta a cualquier alto) */
-  #doctor,#turnos,#contacto{min-height:100vh;min-height:100dvh;
-    display:flex;flex-direction:column;justify-content:center}
+  /* alto cómodo que se ADAPTA al contenido (sin forzar 100vh, para no dejar
+     franjas vacías entre secciones al hacer scroll) */
+  section{padding:clamp(72px,12vh,130px) 0;position:relative}
   .head{max-width:48em;margin-bottom:60px}
   .head h2{font-size:clamp(2.3rem,4.4vw,3.6rem);margin:16px 0 16px}
   .head p{color:var(--ink-dim);font-size:1.06rem;max-width:40em}
@@ -173,9 +172,9 @@
   .trat{position:relative;height:300vh}
   .trat-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
   .trat-sticky .wrap{width:100%}
-  .trat-head{text-align:center;margin-bottom:34px}
+  .trat-head{text-align:center;margin-bottom:26px}
   .trat-head h2{font-size:clamp(2rem,3.8vw,3rem);margin-top:12px}
-  .trat-stage{position:relative;min-height:58vh}
+  .trat-stage{position:relative;min-height:72vh}
   .trat-panel{position:absolute;inset:0;display:grid;grid-template-columns:1.04fr .96fr;gap:54px;
     align-items:center;opacity:0;pointer-events:none;will-change:transform,opacity}
   .trat-media{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;
